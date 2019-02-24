@@ -3,10 +3,14 @@ body {
   margin: 2em;
 }
 
-
 /* text */
 p {
   line-height: 1.7em;
+}
+
+h1 {
+  font-weight: normal;
+  margin: 2em 0 1em 0 ;
 }
 
 h2 {
