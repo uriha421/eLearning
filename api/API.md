@@ -10,55 +10,55 @@
  ```
 POST /user
  ```
-`req`	email, username, password
-`res` success(ture or false), message
-`stc` 201, 400, 500
+`req`	email, username, password  
+`res` success(ture or false), message  
+`stc` 201, 400, 500  
 
 ##### email auth
  ```
 GET /user/:auth_password
  ```
-`res` success, message (if success == true res session(id,username,icon_url))
-`stc` 200, 400, 500
+`res` success, message (if success == true res session(id,username,icon_url))  
+`stc` 200, 400, 500  
 
 ##### login
  ```
 POST /user/:username
  ```
-`req`	email or username
-`res` success, message (if success == true res session(id,username,icon_url))
-`stc` 200, 400, 500
+`req`	email or username  
+`res` success, message (if success == true res session(id,username,icon_url))  
+`stc` 200, 400, 500  
 
 ##### logout
 ```
 DELETE /user/:username
 ```
-`res` success, message
-`stc` 204, 400, 401, 403, 500
+`res` success, message  
+`stc` 204, 400, 401, 403, 500  
 
 
 ##### get user info
 ```
 GET /user/:username
 ```
-`res` success, message (if success == true response ※something)
-`stc` 200, 400, 401, 403, 500
+`res` success, message (if success == true response ※something)  
+`stc` 200, 400, 401, 403, 500  
 
 ##### change user info
 ```
 PUT /user/:username
 ```
-`req`	※something
-`res` success, message
-`stc` 200,400,401,403,500
+`req`	※something  
+`res` success, message  
+`stc` 200,400,401,403,500  
 
 ##### change password
 ```
 PUT /user/:username/password
 ```
-`req`	password, new_password
-`res` success, message (if success == true res a new session(id,username,icon_url))
-`stc` 200, 400, 500
+`req`	password, new_password  
+`res` success, message (if success == true res a new session(id,username,icon_url))  
+`stc` 200, 400, 500  
 
 ※something = email, username, icon_url, location, profile, github, level, follower_count, following_count...
 
@@ -68,7 +68,7 @@ PUT /user/:username/password
 ```
 GET /user/:username/all
 ```
-`req`	page
+`req`	page  
 `stc` 200, 400, 500
 
 ##### get one resource
