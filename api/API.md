@@ -193,10 +193,10 @@ GET /user/:username/resource/:resource-id/subscription
 `stc` 200, 400, 500
 
 
-※ status code
-200	ok
-201	created
-400	bad request
-401	Unauthorized
-403	Forbidden
-500	Internal Server Error
+※ status code  
+200	ok  
+201	created  
+400	bad request  
+401	Unauthorized  
+403	Forbidden  
+500	Internal Server Error  
