@@ -1,8 +1,9 @@
 # API
 
-`req` = request
-`res` = response
-`stc` = status code
+`req` = request  
+`res` = response  
+`stc` = status code  
+`msg` = message
 
 ## users
 
@@ -11,75 +12,267 @@
 POST /user
  ```
 `req`	email, username, password  
-`res` success(ture or false), message  
+`res` code(0 or 1), msg, data  
+```
+{   
+　　code: 0,            //code = 0 true, code = 1 false    
+　　msg: "ok",    
+　　data: {  
+       "session": {},     //not sure about the content of session
+       "id": "xxx",
+       "username": "xxx",
+  }   
+}    
+```
 `stc` 201, 400, 500  
-
-##### email auth
- ```
-GET /user/:auth_password
- ```
-`res` success, message (if success == true res session(id,username,icon_url))  
-`stc` 200, 400, 500  
 
 ##### login
  ```
-POST /user/:username
+POST /user/login
  ```
-`req`	email or username  
-`res` success, message (if success == true res session(id,username,icon_url))  
+`req`	username(or email), password  
+`res` code, msg, data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "session": {},
+       "id": "xxx",
+       "username": "xxx",
+   }
+}   
+```
 `stc` 200, 400, 500  
 
 ##### logout
 ```
 DELETE /user/:username
 ```
-`res` success, message  
+`res` code, msg, data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}   
+```  
 `stc` 204, 400, 401, 403, 500  
 
-
-##### get user info
+##### get user info   
 ```
-GET /user/:username
+GET /user/:username  
 ```
-`res` success, message (if success == true response ※something)  
-`stc` 200, 400, 401, 403, 500  
+`res` code, msg ,data
+```
+{   
+　　code: 0,   
+　　msg: "ok",   
+　　data: {                            
+       "id": "xxx",
+       "email": "xxx",
+       "username": "xxx",    
+       "avaster": "xxx",    
+       "location": "xxx",    
+       "profile": "xxx",    
+       "github": "xxx",       
+       ...                  //it will be extended.
+   }   
+}    
+```  
+`stc` 200, 400, 401, 403, 500    
 
-##### change user info
+#### change user info
 ```
 PUT /user/:username
 ```
-`req`	※something  
-`res` success, message  
-`stc` 200,400,401,403,500  
+`req` id, email, username, avaster, location, profile, github ...
+`res` code, msg ,data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
 
-##### change password
+   }
+}   
+```  
+
+## about topics
+
+##### homepage
 ```
-PUT /user/:username/password
+GET /                      
 ```
-`req`	password, new_password  
-`res` success, message (if success == true res a new session(id,username,icon_url))  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "homepage": [],      //the list of the newest upload
+       "has_more": false     //whether there are next page or not
+   }
+}
+```
+`stc` 200, 400, 500
+
+##### texts
+```
+GET /texts/?tab=aaa&page=x         // x is page number, aaa is tab name.
+                                   // no tab show all. no page show 1.
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "texts": [],          //the list of the texts
+       //"tab": ‘xx’,        //res the same as the tab in url
+       //"tab_list", [],     //the list of all the tab
+       "has_more": false     //whether there are next page or not
+   }
+}
+```
 `stc` 200, 400, 500  
+※tab is like: front-end, back-end, bigdata, algorithm...   
+tab and tab_list is not needed right now.
 
-※something = email, username, icon_url, location, profile, github, level, follower_count, following_count...
+##### notes
+```
+GET /notes/?tab=aaa&page=x         // x is page number, aaa is tab name.
+                                   // no tab show all. no page show 1.
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "notes": [],          //the list of the texts
+       //"tab": ‘xx’,        //res the same as the tab in url
+       //"tab_list", [],     //the list of all the tab
+       "has_more": false     //whether there are next page or not
+   }
+}
+```
+`stc` 200, 400, 500
 
+##### questions
+```
+GET /questions/?tab=aaa&page=x         // x is page number, aaa is tab name.
+                                       // no tab show all. no page show 1.
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "questions": [],      //the list of the texts
+       //"tab": ‘xx’,        //res the same as the tab in url
+       //"tab_list", [],     //the list of all the tab
+       "has_more": false     //whether there are next page or not
+   }
+}
+```
+`stc` 200, 400, 500
 
-## user resource
+## about user resource
+※topics = texts / notes / questions (/ courses)
 ##### list all resource of someone
 ```
-GET /user/:username/all
+GET /user/:username/index
 ```
-`req`	page  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "resource": [],       //the list of the resource that user upload recently
+       "has_more": false,     //whether there are next page or not
+   }
+}
+```
 `stc` 200, 400, 500
 
-##### get one resource
+##### list someone's all resource of one topic
+```
+GET /user/:username/※topics/?page=x
+```  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {  
+       "※topics": [],        //the list of the resource that user upload of this topic
+       "has_more": false,     //whether there are next page or not
+   }
+}
+```
+`stc` 200, 400, 500
+
+##### get one resource of the topic
 ```
 GET /user/:username/※topics/:resource-id
+```  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "resource": {                    
+　　　　　　 "title": "xxx",
+            "tab": "xxx",
+            "content": "xxx",
+            "views_num": "1234",
+            "comments_num": "12",
+            "like_num": "1234",
+            "created_at": "2019-03-02 21:40",
+         },       
+       "comments": [],       //all comments of this resource
+   }
+}
 ```
 `stc` 200, 400, 500
 
-##### upload/modify one resource
+##### upload one resource
 ```
 POST /user/:username/※topics/:resource-id
+```
+`req`	title, tab, content  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
+```
+`stc` 200, 400, 500
+
+##### modify one resource
+```
+PUT /user/:username/※topics/:resource-id
+```
+`req`	title, tab, content  
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
 ```
 `stc` 200, 400, 500
 
@@ -87,21 +280,34 @@ POST /user/:username/※topics/:resource-id
 ```
 DELETE /user/:username/※topics/:resource-id
 ```
-`stc` 204,400,401,403,500
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
 
-※topics = texts / courses / notes / questions
+   }
+}
+```
+`stc` 204, 400, 401, 403, 500
+
 
 
 ## comments
-##### Show comments
-```
-GET /user/:username/resource/:resource-id/comments
-```
-`stc` 200, 400, 500
-
 ##### Post a comment
 ```
 POST /user/:username/resource/:resource-id/comments
+```
+`res` comment
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
 ```
 `stc` 201, 400, 500
 
@@ -109,80 +315,83 @@ POST /user/:username/resource/:resource-id/comments
 ```
 DELETE /user/:username/resource/:resource-id/comments
 ```
+`res` comment
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
+```
 `stc` 204, 400, 401, 403, 500
 
 
-## Message
-##### Show all message
+## Other
+##### give or cancel a like of one resource
 ```
-GET /user/:username/message/
+GET /user/:username/resource/:resource-id/like
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
 ```
 `stc` 200, 400, 500
 
-##### Show message of @
+##### Add or delete collection of one resource
 ```
-GET /user/:username/message/at
+GET /user/:username/resource/:resource-id/favourite
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
 ```
 `stc` 200, 400, 500
 
-##### Show message of like
+## message
+##### Show all the message
 ```
-GET /user/:username/message/like
+GET /user/:username/msg/
+```
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+
+   }
+}
 ```
 `stc` 200, 400, 500
 
-##### Show message of system
-```
-GET /user/:username/message/system
-```
-`stc` 200, 400, 500
+※ status code  
+200	ok  
+201	created  
+400	bad request  
+401	Unauthorized  
+403	Forbidden  
+500	Internal Server Error  
 
-##### Show message of comments
-```
-GET /user/:username/message/comment
-```
-`stc` 200, 400, 500
 
-##### Show message of follow
-```
-GET /user/:username/message/follow
-```
-`stc` 200, 400, 500
-
-##### Show message of favourite
-```
-GET /user/:username/message/favourite
-```
-`stc` 200, 400, 500
-
-##### Show message of subscription
-```
-GET /user/:username/message/subscription
-```
-`stc` 200, 400, 500
-
-##### Show message of pravite mail
-```
-GET /user/:username/message/mail
-```
-`stc` 200, 400, 500
-
+# ==================================
+ the function that will be implemented next time
 ## Other
 ##### follow one user
 ```
 GET /user/:username/follow
-```
-`stc` 200, 400, 500
-
-##### give resource a like
-```
-GET /user/:username/resource/:resource-id/like
-```
-`stc` 200, 400, 500
-
-##### Add resource to my collection
-```
-GET /user/:username/resource/:resource-id/favourite
 ```
 `stc` 200, 400, 500
 
@@ -192,11 +401,16 @@ GET /user/:username/resource/:resource-id/subscription
 ```
 `stc` 200, 400, 500
 
+## message
+##### Show msg from ※somewhere
+```
+GET /user/:username/msg/※somewhere   
+```
+`stc` 200, 400, 500  
+※somewhere = comments/like/system/follow/favourite/subscription
 
-※ status code  
-200	ok  
-201	created  
-400	bad request  
-401	Unauthorized  
-403	Forbidden  
-500	Internal Server Error  
+//##### Show msg of pravite mail   
+//GET /user/:username/msg/mail   
+//`stc` 200, 400, 500  
+
+## email_auth
