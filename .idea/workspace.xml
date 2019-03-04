@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce0fd168-178c-41b0-8968-a7212cf2b9e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/api/dbops/api.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/defs/apidef.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/defs/errs.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/handlers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/API.md" beforeDir="false" afterPath="$PROJECT_DIR$/api/API.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +16,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/api/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state relative-caret-position="450">
               <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
               <folding>
                 <element signature="e#14#75#0" expanded="true" />
@@ -135,31 +129,6 @@
               <item name="eLearning" type="b2602c69:ProjectViewProjectNode" />
               <item name="eLearning" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="eLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eLearning" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eLearning" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eLearning" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="dbops" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eLearning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eLearning" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="defs" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -170,7 +139,7 @@
     <property name="DefaultGoTemplateProperty" value="Go Application" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551706825370" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551707601175" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -226,16 +195,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551703082633</updated>
-      <workItem from="1551703085298" duration="3231000" />
+      <workItem from="1551703085298" duration="3792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3231000" />
+    <option name="totallyTimeSpent" value="3792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="821" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -311,7 +279,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/api/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state relative-caret-position="450">
           <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
           <folding>
             <element signature="e#14#75#0" expanded="true" />
