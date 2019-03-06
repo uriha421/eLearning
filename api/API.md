@@ -130,8 +130,10 @@ GET /texts/?tab=aaa&page=x         // x is page number, aaa is tab name.
 　　code: 0,
 　　msg: "ok",
 　　data: {
-       "texts": [],          //the list of the texts
-       //"tab": ‘xx’,        //res the same as the tab in url
+       "texts":"xx",         //the name of one text
+       "units": [],          //content of the text
+       "public": true,       //if this unit public or not
+       //"tab": "xx",        //res the same as the tab in url
        //"tab_list", [],     //the list of all the tab
        "has_more": false     //whether there are next page or not
    }
@@ -299,7 +301,8 @@ DELETE /user/:username/※topics/:resource-id
 ```
 POST /user/:username/resource/:resource-id/comments
 ```
-`res` comment
+`req` comment  
+`res` code, msg, data
 ```
 {
 　　code: 0,
@@ -315,7 +318,7 @@ POST /user/:username/resource/:resource-id/comments
 ```
 DELETE /user/:username/resource/:resource-id/comments
 ```
-`res` comment
+`res` code, msg, data
 ```
 {
 　　code: 0,
