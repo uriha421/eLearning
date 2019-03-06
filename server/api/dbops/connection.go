@@ -1,11 +1,11 @@
 package dbops
 
-//Initialize the database
-
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	)
+
+//Initialize the database
 
 //为何要申明变量 --> 因为想定义一个dbops包下的局部变量
 var (

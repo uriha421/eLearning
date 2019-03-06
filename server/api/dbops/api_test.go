@@ -24,7 +24,7 @@ func TestUserWorkFlow(t *testing.T) {
 	t.Run("add", TestAddUser)
 	t.Run("get", TestGetUser)
 	t.Run("del", TestDeleteUser)
-
+	t.Run("reget", TestRegetUser)
 }
 
 func TestAddUser(t *testing.T) {
@@ -36,7 +36,7 @@ func TestAddUser(t *testing.T) {
 
 func TestGetUser(t *testing.T) {
 	pwd, err := GetUserCredential("test")
-	if pwd != "1234" || err != nil{             // pwd != nil 为什么报错
+	if pwd != "1234" || err != nil{             //
 		t.Errorf("Error of GetUser")    // 为什么不用输出err
 	}
 }
