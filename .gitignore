@@ -1,3 +1,4 @@
+# Created by .ignore support plugin (hsz.mobi)
 /target
 /out
 /classes
@@ -16,3 +17,4 @@ logs
 /log
 /tmp
 hotspot.log
+.gitinore
