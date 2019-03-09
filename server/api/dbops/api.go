@@ -1,11 +1,11 @@
 package dbops
 
 import (
+	"../defs"
+	"../utils"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
-	"../defs"
-	"../utils"
 	"time"
 )
 
@@ -68,7 +68,7 @@ func AddNewVideoInfo(aid int, video_name string)(*defs.VideoInfo, error){
 	t := time.Now()
 	ctime := t.Format("Jan 02 2006, 15:04:05") //M D Y, HH:MM:SS
 
-	stmtIns, err := dbConn.Prepare("insert into video_server (id, author_id, name, display_ctime) valus (?,?,?,?)")
+	stmtIns, err := dbConn.Prepare("insert into video_info (id, author_id, name, display_ctime) values (?,?,?,?)")
 	if err != nil{
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func AddNewVideoInfo(aid int, video_name string)(*defs.VideoInfo, error){
 }
 
 func GetVideoInfo(vid string)(*defs.VideoInfo, error){
-	stmtGet, err := dbConn.Prepare("select author_id, name, display_ctime from video_server where id = ?")
+	stmtGet, err := dbConn.Prepare("select author_id, name, display_ctime from video_info where id = ?")
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func GetVideoInfo(vid string)(*defs.VideoInfo, error){
 //}
 
 func DelVideoInfo(vid string) error {
-	stmtDel, err := dbConn.Prepare("delete from video_server where aid = ?")
+	stmtDel, err := dbConn.Prepare("delete from video_info where id = ?")
 	if err != nil {
 		return err
 	}
@@ -122,4 +122,50 @@ func DelVideoInfo(vid string) error {
 	}
 	defer stmtDel.Close()
 	return nil
+}
+
+func AddNewComments(vid string, aid string, content string) error {
+	id, err := utils.NewUUID()
+	if err != nil {
+		return err
+	}
+	stmtAdd, err := dbConn.Prepare("insert into comments value (id, video_id, author_id, content) values (?,?,?,?)")
+	if err != nil {
+		return err
+	}
+	_, err = stmtAdd.Exec(id, vid, aid, content)
+	if err != nil {
+		return err
+	}
+	defer stmtAdd.Close()
+	return nil
+}
+
+func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
+	stmtOut, err := dbConn.Prepare(`select comments.id, users.Login_name, comments.content from comments 
+		inner join users on comments.author_id = users.id 
+		where video_id = ? and comments.time > FROM_UNIXTIME(?) and comments.time <= FROM_UNIXTIME(?)
+		order by comments.time desc`) //为什么要加时间？？？
+	if err != nil {
+		return nil, err
+	}
+
+	var res []*defs.Comment
+
+	rows, err := stmtOut.Query(vid, from, to)   //执行Query，然后返回一个*rows。rows是row的一个数组。
+	if err != nil {
+		return res, err
+	}
+
+	for rows.Next(){
+		var id, name, content string
+		if err := rows.Scan(&id, &name, &content); err != nil{
+			return res, err
+		}
+
+	c := &defs.Comment{Id: id, VideoId: vid, Author: name, Content: content}
+	res = append(res, c)
+	}
+	defer stmtOut.Close()
+	return res, nil
 }
