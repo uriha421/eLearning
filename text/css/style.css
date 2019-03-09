@@ -23,7 +23,7 @@ p {
   line-height: 1.7em;
 }
 
-li {
+li.list {
   margin: 1em 0 1em 0;;
 }
 /* table  */
@@ -42,4 +42,3 @@ th, td {
 
 
 /* code */
-pre
