@@ -1,8 +1,8 @@
 package dbops
 
 import (
-	"../defs"
-	"../utils"
+	"github.com/eLearning/server/api/defs"
+	"github.com/eLearning/server/api/utils"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
@@ -91,7 +91,7 @@ func GetVideoInfo(vid string)(*defs.VideoInfo, error){
 		dct string
 	)
 
-	err =stmtGet.QueryRow(vid).Scan(&aid, &name, &dct)
+	err = stmtGet.QueryRow(vid).Scan(&aid, &name, &dct)
 	if err != nil && err != sql.ErrNoRows{
 		return nil, err
 	}
