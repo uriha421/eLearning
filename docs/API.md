@@ -14,6 +14,11 @@ POST /user
 `req`	email, username, password  
 `res` code(0 or 1), msg, data  
 ```
+{
+    "success":true,
+    "success_id":"86a4da55-1504-4ed6-877c-8faa0d815797"
+}
+
 {   
 　　code: 0,            //code = 0 true, code = 1 false    
 　　msg: "ok",    
@@ -63,7 +68,7 @@ DELETE /user/:username
 
 ##### get user info   
 ```
-GET /user/:username  
+GET /user/:username/settings  
 ```
 `res` code, msg ,data
 ```
@@ -86,7 +91,7 @@ GET /user/:username
 
 #### change user info
 ```
-PUT /user/:username
+PUT /user/:username/settings
 ```
 `req` id, email, username, avaster, location, profile, github ...
 `res` code, msg ,data
@@ -113,7 +118,6 @@ GET /
 　　msg: "ok",
 　　data: {
        "homepage": [],      //the list of the newest upload
-       "has_more": false     //whether there are next page or not
    }
 }
 ```
@@ -131,10 +135,8 @@ GET /texts/?tab=aaa&page=x         // x is page number, aaa is tab name.
 　　msg: "ok",
 　　data: {
        "texts":"xx",         //the name of one text
-       "units": [],          //content of the text
-       "public": true,       //if this unit public or not
-       //"tab": "xx",        //res the same as the tab in url
-       //"tab_list", [],     //the list of all the tab
+       "tab": "xx",          //res the same as the tab in url
+       "tab_list", [],       //the list of all the tab
        "has_more": false     //whether there are next page or not
    }
 }
@@ -155,8 +157,8 @@ GET /notes/?tab=aaa&page=x         // x is page number, aaa is tab name.
 　　msg: "ok",
 　　data: {
        "notes": [],          //the list of the texts
-       //"tab": ‘xx’,        //res the same as the tab in url
-       //"tab_list", [],     //the list of all the tab
+       "tab": ‘xx’,          //res the same as the tab in url
+       "tab_list", [],       //the list of all the tab
        "has_more": false     //whether there are next page or not
    }
 }
@@ -175,8 +177,8 @@ GET /questions/?tab=aaa&page=x         // x is page number, aaa is tab name.
 　　msg: "ok",
 　　data: {
        "questions": [],      //the list of the texts
-       //"tab": ‘xx’,        //res the same as the tab in url
-       //"tab_list", [],     //the list of all the tab
+       "tab": ‘xx’,        //res the same as the tab in url
+       "tab_list", [],     //the list of all the tab
        "has_more": false     //whether there are next page or not
    }
 }
@@ -185,9 +187,9 @@ GET /questions/?tab=aaa&page=x         // x is page number, aaa is tab name.
 
 ## about user resource
 ※topics = texts / notes / questions (/ courses)
-##### list all resource of someone
+##### list all resource of someone (user homepage)
 ```
-GET /user/:username/index
+GET /user/:username
 ```
 `res`	code，msg，data
 ```
@@ -196,6 +198,7 @@ GET /user/:username/index
 　　msg: "ok",
 　　data: {
        "resource": [],       //the list of the resource that user upload recently
+       "followed": true,      //if followed this user or not
        "has_more": false,     //whether there are next page or not
    }
 }
@@ -221,7 +224,7 @@ GET /user/:username/※topics/?page=x
 
 ##### get one resource of the topic
 ```
-GET /user/:username/※topics/:resource-id
+GET /user/:username/※topics/:resource-id/?tab=###
 ```  
 `res`	code，msg，data
 ```
@@ -230,12 +233,17 @@ GET /user/:username/※topics/:resource-id
 　　msg: "ok",
 　　data: {
        "resource": {                    
-　　　　　　 "title": "xxx",
+　　　　　 　 "title": "xxx",
             "tab": "xxx",
             "content": "xxx",
             "views_num": "1234",
             "comments_num": "12",
             "like_num": "1234",
+            "liked": true
+            "favourite_num": 345
+            "favourited": true
+            "subscription_num": 1234
+            "subscripted": false
             "created_at": "2019-03-02 21:40",
          },       
        "comments": [],       //all comments of this resource
@@ -243,6 +251,7 @@ GET /user/:username/※topics/:resource-id
 }
 ```
 `stc` 200, 400, 500
+※tab = list or title's name
 
 ##### upload one resource
 ```
@@ -299,7 +308,7 @@ DELETE /user/:username/※topics/:resource-id
 ## comments
 ##### Post a comment
 ```
-POST /user/:username/resource/:resource-id/comments
+POST /user/:username/※topics/:resource-id/comments
 ```
 `req` comment  
 `res` code, msg, data
@@ -316,7 +325,7 @@ POST /user/:username/resource/:resource-id/comments
 
 ##### Delete a comment
 ```
-DELETE /user/:username/resource/:resource-id/comments
+DELETE /user/:username/※topics/:resource-id/comments
 ```
 `res` code, msg, data
 ```
@@ -332,9 +341,16 @@ DELETE /user/:username/resource/:resource-id/comments
 
 
 ## Other
+
+##### follow one user
+```
+GET /user/:username/follow
+```
+`stc` 200, 400, 500
+
 ##### give or cancel a like of one resource
 ```
-GET /user/:username/resource/:resource-id/like
+GET /user/:username/※topics/:resource-id/like
 ```
 `res`	code，msg，data
 ```
@@ -350,7 +366,7 @@ GET /user/:username/resource/:resource-id/like
 
 ##### Add or delete collection of one resource
 ```
-GET /user/:username/resource/:resource-id/favourite
+GET /user/:username/※topics/:resource-id/favourite
 ```
 `res`	code，msg，data
 ```
@@ -364,11 +380,11 @@ GET /user/:username/resource/:resource-id/favourite
 ```
 `stc` 200, 400, 500
 
-## message
-##### Show all the message
+##### Subscribe to a resource-id
 ```
-GET /user/:username/msg/
+GET /user/:username/※topics/:resource-id/subscription
 ```
+`res`	code，msg，data
 ```
 {
 　　code: 0,
@@ -380,6 +396,47 @@ GET /user/:username/msg/
 ```
 `stc` 200, 400, 500
 
+
+## show notifications
+##### Show all the notifications
+```
+GET /user/:username/notification/?tab=###&page=###
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "notifications": [],       //the list of notifications
+   }
+}
+```
+`stc` 200, 400, 500
+※tab = comments/like/system/follow/favourite/subscription
+
+##### Show the detail of the notifications
+```
+GET /user/:username/notification/:resource-id
+```
+`res`	code，msg，data
+```
+{
+　　code: 0,
+　　msg: "ok",
+　　data: {
+       "title": hello        
+       "from": comments
+       "content": your notes was commented by someone
+       "link": ###
+   }
+}
+```
+`stc` 200, 400, 500
+※tab = comments/like/system/follow/favourite/subscription
+
+## email_auth
+
 ※ status code  
 200	ok  
 201	created  
@@ -387,33 +444,3 @@ GET /user/:username/msg/
 401	Unauthorized  
 403	Forbidden  
 500	Internal Server Error  
-
-
-# ==================================
- the function that will be implemented next time
-## Other
-##### follow one user
-```
-GET /user/:username/follow
-```
-`stc` 200, 400, 500
-
-##### Subscribe to a resource-id
-```
-GET /user/:username/resource/:resource-id/subscription
-```
-`stc` 200, 400, 500
-
-## message
-##### Show msg from ※somewhere
-```
-GET /user/:username/msg/※somewhere   
-```
-`stc` 200, 400, 500  
-※somewhere = comments/like/system/follow/favourite/subscription
-
-//##### Show msg of pravite mail   
-//GET /user/:username/msg/mail   
-//`stc` 200, 400, 500  
-
-## email_auth
