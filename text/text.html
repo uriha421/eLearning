@@ -5,64 +5,75 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet"> 
-    <link href="./css/atelier-sulphurpool-light.css" rel="stylesheet"> 
+    <link href="./css/prettify.css" rel="stylesheet"> 
   </head>
   <body onload="PR.prettyPrint()">
-    <h1>Introduction</h1>
-    <p>
-    this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text
-    </p>
-    <p>
-    this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text
-    </p>
-    <p>
-    At introduction, you need to write what your readers already know. Then you need to write a problem on the situation. Finally, write what the point is, or will be.
-    </p>
 
-    <ul>
-      <li class="list">the first point.</li>
-      <li class="list">the second point.</li>
-      <li class="list">the third point.</li>
-    </ul>
+    <div class="title">
+      <h1 class="heading-of-title">Title</h1>
+    </div>
 
-    <h2>1 the first point</h2>
-    <p>
-    this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text
-    </p>
-    <p>
-    this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text this is a sample text
-    </p>
+    <div class="contents">
 
-    <h3>1.1 table</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>1 aaa</th><th>2 aaa</th><th>3 aaa</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>a</td><td>b</td><td>c</td>
-        </tr>
-        <tr>
-          <td>a</td><td>b</td><td>c</td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="introduction">
+        <h2 class="heading-of-introduction">Introduction</h2>
+        <p>At introduction, you need to write what your readers already know. Then you need to write a problem on the situation. Finally, write what the point is, or will be.</p>
+        <p>At introduction, you need to write what your readers already know. Then you need to write a problem on the situation. Finally, write what the point is, or will be.</p>
 
-    <h3>1.2 code</h3>
-    <pre><code class="prettyprint linenums">#include &lt;stdio.h&gt;
-int main(int argc, char **argv)
-{
-    printf(&quot;hello world\n&quot;);
-    return 0;
-}
-</code></pre>
-    <h3>1.3 aaa</h3>
-    
-    <h2>2 the second point</h2>
+        <ul class="unordered-list">
+          <li class="list">the first point.</li>
+          <li class="list">the second point.</li>
+          <li class="list">the third point.</li>
+        </ul>
+        
+        <p>At introduction, you need to write what your readers already know. Then you need to write a problem on the situation. Finally, write what the point is, or will be.</p>
+      </div>
 
-    <script src="./css/google-code-prettify/prettify.js"></script>
+
+
+      <div class="nested-point-1">
+        <div class="nested-introduction">
+          <h3 class="heading-of-nested-point-1">1. The first point</h3>
+          <p>At this area, you need to write what the first point is.</p>
+        </div>
+        
+        <div class="nested-point-2">
+          <h4 class="heading-of-nested-point-2">1.1. Table</h4>
+          <p>This is a table.</p>
+          <table class="table">
+            <tr><th class="table-header">111</th><th class="table-header">222</th><th class="table-header">333</th></tr>
+            <tr><td class="table-data">a</td><td class="table-data">b</td><td class="table-data">c</td></tr>
+            <tr><td class="table-data">a</td><td class="table-data">b</td><td class="table-data">c</td></tr>
+            <tr><td class="table-data">a</td><td class="table-data">b</td><td class="table-data">c</td></tr>
+          </table>
+          <p>This is a table.</p>
+        </div>
+
+        <div class="nested-point-2">
+          <h4 class="heading-of-nested-point-2">1.2. Code</h4>
+          <p>This is a code.</p>
+          <pre><code class="prettyprint linenums">#include &lt;stdio.h&gt;
+    int main(int argc, char **argv)
+    {
+        printf(&quot;hello world\n&quot;);
+        return 0;
+    }</code></pre>
+          <p>This is a code. It has 10 colors except black and white.</p>
+          </div>
+
+        <div class="nested-point-2">
+          <h4 class="heading-of-nested-point-2">1.3. AAA</h4>
+        </div>
+      </div>
+
+
+
+      <div class="nested-point-1">
+        <h3 class="heading-of-nested-point-1">2. The second point</h3>
+      </div>
+
+    </div>
+    <script src="./js/prettify.js"></script>
   </body>
 </html>
 
